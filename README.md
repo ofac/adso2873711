@@ -2,7 +2,7 @@
 
 ## Tecnólogo en Análisis y Desarrollo de Software 
 
-![Hollow Knight](https://static.wikia.nocookie.net/nanatsu-no-taizai/images/e/e3/Hawk_Anime_Season_3_Design.png)
+![Hollow Knight](http://tinyurl.com/pnn2eaz8)
 
 | Temas | Descripción |
 | ----- | ----------- |
