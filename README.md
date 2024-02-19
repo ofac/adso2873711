@@ -10,3 +10,6 @@
 | 02- HTML| Lenguaje de Etiquetas |
 | 03- CSS| Hoja de Estilos en Cascada |
 | 04- JavaScript| Lenguaje de Programación |
+
+
+[Slides](http://tinyurl.com/wnkk334u)
