@@ -47,7 +47,7 @@ main {
             margin: 0;
         }
         h1 {
-            font-size: 4rem;
+            font-size: 3.4rem;
             font-weight: 400;
         }
         h2 {
@@ -112,7 +112,7 @@ main {
             width: fit-content;
         }
         p {
-            font-size: 1.8rem;
+            font-size: 1.4rem;
             margin: 10px 0;
         }
         xmp {

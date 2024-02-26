@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>01- Child</title>
+    <title>09- Item Numbering</title>
     <link rel="stylesheet" href="css/master.css">
 </head>
 <body>
@@ -14,21 +14,29 @@
     </nav>
     <main>
         <header>
-            <h1>01 - Child > </h1>
+            <h1>09- Numbering $ </h1>
             <h2>
-                This wildcard allows you to create child elements (Nest).
+                This wildcard allows consecutive numbers.
             </h2>
         </header>
         <section>
             <h3>Example:</h3>
-            <p>ul>li>a</p>
+            <p>ul>li.num$*5</p>
+            <p>section>article.sec$$$*3</p>
             <h3>Result:</h3>
 <xmp>
 <ul>
-    <li>
-        <a href=""></a>
-    </li>
+    <li class="num1"></li>
+    <li class="num2"></li>
+    <li class="num3"></li>
+    <li class="num4"></li>
+    <li class="num5"></li>
 </ul>
+<section>
+    <article class="sec001"></article>
+    <article class="sec002"></article>
+    <article class="sec003"></article>
+</section>
 </xmp>
         </section>
     </main>

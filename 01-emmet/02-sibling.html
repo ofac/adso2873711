@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>01- Child</title>
+    <title>02- Sibling</title>
     <link rel="stylesheet" href="css/master.css">
 </head>
 <body>
@@ -14,21 +14,19 @@
     </nav>
     <main>
         <header>
-            <h1>01 - Child > </h1>
+            <h1>02 - Sibling + </h1>
             <h2>
-                This wildcard allows you to create child elements (Nest).
+                This wildcard allows you to create sibling elements.
             </h2>
         </header>
         <section>
             <h3>Example:</h3>
-            <p>ul>li>a</p>
+            <p>header+section+footer</p>
             <h3>Result:</h3>
 <xmp>
-<ul>
-    <li>
-        <a href=""></a>
-    </li>
-</ul>
+<header></header>
+<section></section>
+<footer></footer>
 </xmp>
         </section>
     </main>
