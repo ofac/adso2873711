@@ -59,6 +59,7 @@ main {
    main {
        header {
            flex-direction: column;
+           gap: 0.5rem;
            a:is(:link, :visited) {
                display: flex;
                justify-content: center;
