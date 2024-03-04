@@ -12,4 +12,4 @@
 | 04- JavaScript| Lenguaje de Programación |
 
 
-[Slides](http://tinyurl.com/wnkk334u)
+[Google Drive: Slides in PDF](http://tinyurl.com/wnkk334u)
