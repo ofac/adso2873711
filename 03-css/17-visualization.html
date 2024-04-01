@@ -55,6 +55,41 @@
         div.box3 {
             overflow: scroll;
         }
+        div.element {
+            border: 2px solid #0009;
+            width: 200px;
+            font-size: 4.4rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            height: 80px;
+        }
+        div.parent-element {
+            display: flex;
+            margin: 20px auto;
+            gap: 10px;
+            padding-bottom: 4rem;
+        }
+        div.element1 {
+            background-color: #e3e3b6;
+            left: 60px;
+            z-index: 1;
+        }
+        div.element2 {
+            background-color: #b8b8f1;
+            left: 0px;
+            top: 30px;
+            z-index: 2;
+        }
+        div.element3 {
+            background-color: #edc8c8;
+            left: -60px;
+            top: 60px;
+            z-index: 3;
+        }
+        
+
     </style>
 </head>
 <body>
@@ -112,6 +147,13 @@
                         Lorem ipsum dolor, sit amet consectetur adipisicing elit. Veniam illum optio temporibus repellendus quisquam cumque. Ab accusamus autem esse. Laboriosam aperiam est porro non nesciunt consectetur corporis minus cupiditate necessitatibus?
                     </p>
                 </div>
+            </div>
+            <br>
+            <h3>Z-Index</h3>
+            <div class="parent-element">
+                <div class="element element1">1</div>
+                <div class="element element2">2</div>
+                <div class="element element3">3</div>
             </div>
         </section>
     </main>
