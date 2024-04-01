@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Position</title>
+    <link rel="stylesheet" href="css/master.css">
+    <style>
+        div.parent {
+            border: 2px solid #0009;
+            margin: 20px auto;
+            padding: 32px;
+            width: 200px;
+        }
+        div.child {
+            background-color: #0006;
+            color: #fff9;
+            padding: 10px;
+            text-align: center;
+            width: 50px;
+        }
+        div.relative {
+            position: relative;
+        }
+        div.absolute {
+            position: absolute;
+        }
+        div.fixed {
+            position: fixed;
+        }
+        div.sticky {
+            position: -webkit-sticky;
+            position: sticky;
+        }
+        div.child.relative {
+            top: -20px;
+            left: 150px;
+        }
+        div.child.absolute {
+            top: 50px;
+            left: 10px
+        }
+        div.child.fixed {
+            top: 640px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        div.child.sticky {
+            top: 20px;
+        }
+        div.parent p {
+            font-size: 0.8rem;
+            text-align: justify;
+        }
+    </style>
+</head>
+<body>
+    <nav class="controls">
+        <a href="index.html">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#ffffff" d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg>
+        </a>
+    </nav>
+    <main>
+        <header>
+            <h1>Position</h1>
+            <ul>
+                <li>Normal/Static</li>
+                <li>Relative</li>
+                <li>Absolute</li>
+                <li>Fixed</li>
+                <li>Sticky</li>
+            </ul>
+        </header>
+        <section>
+            <h3>Relative:</h3>
+            <div class="parent">
+                <div class="child relative">BOX</div>
+            </div>
+            <h3>Absolute:</h3>
+            <div class="parent relative">
+                <div class="child absolute">BOX</div>
+            </div>
+            <h3>Fixed:</h3>
+            <div class="parent">
+                <div class="child fixed">BOX</div>
+            </div>
+            <h3>Sticky:</h3>
+            <div class="parent">
+                <div class="child sticky">BOX</div>
+                <p>
+                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quaerat sed, laboriosam quos quia cumque voluptatem omnis ex facilis consequatur, nihil officia laudantium. Placeat debitis ad quibusdam eligendi nostrum vero facere eos obcaecati voluptas tempore. Ex, dolorum? Labore cumque quisquam iusto a, quae dolorem! Enim sunt reprehenderit vero earum numquam aliquam sequi facilis iusto perferendis unde qui labore molestiae, non porro magni. Corporis sunt voluptatem aperiam quam architecto nostrum temporibus, animi distinctio ex modi sequi tempora laborum quod quis, maiores quasi provident harum cupiditate in voluptatum neque? Saepe ducimus omnis aliquam voluptate, laboriosam laudantium necessitatibus accusantium culpa atque delectus deserunt eum fuga amet eligendi nisi vitae quasi iusto maiores ut. Quia velit hic quae vero impedit iste omnis ad obcaecati laudantium! Eveniet, excepturi magni repellat earum beatae dolore necessitatibus! Eius esse qui doloremque. Iure nostrum error alias magni vel itaque earum inventore aspernatur maiores incidunt sunt quisquam velit rem, fugit omnis reiciendis molestiae ab explicabo excepturi suscipit et eius? Iste porro quod error non pariatur magnam ut voluptatem nostrum, quis quas tenetur quo dicta sapiente qui optio voluptatum. Quidem cumque praesentium voluptatum quasi iure ipsum blanditiis vel? Natus ipsa, velit amet inventore vel quo rerum repudiandae, hic corrupti consectetur facilis vitae.
+                </p>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
