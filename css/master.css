@@ -52,7 +52,7 @@ main {
         display: flex;
         flex-direction: column;
         padding: 0;
-        gap: 1rem;
+        gap: 0.4rem;
         
         a:is(:link, :visited) {
             background-color: #0009;
