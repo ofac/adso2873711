@@ -17,6 +17,9 @@ main {
     min-height: 100vh;
 
     header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         h1, h2 {
             color: #9cb8b2;
             text-align: center;
@@ -29,6 +32,19 @@ main {
         h2 {
             font-size: 1.4rem;
             font-weight: 300;
+        }
+        h3 {
+            border-radius: 20px;
+            background-color: #0009;
+            color: #9cb8b2;
+            padding: 2px 12px;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+        img {
+            border-radius: 50%;
+            width: 160px;
+            border: 10px solid #0009;
         }
     }
 

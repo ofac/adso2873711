@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Challenge Responsive Design (Media Queries)</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+		* {
+			transition: all 0.5s ease;
+		}
+        :root {
+            --color-1: #fbee0a;
+            --color-2: #55bcdb;
+        }
+		body {
+            background: #2f2830 url(images/responsive/bg.jpg) no-repeat center /cover;
+            background-attachment: fixed;
+            font-family: 'Poppins', sans-serif;
+		}
+		main {
+			margin: 0px auto;
+			width: 1280px;
+		}
+		header div.logo {
+			background: url(images/responsive/logo-cp2077.png) no-repeat center;
+			background-size: cover;
+			height: 280px;
+		}
+		section.boxes {
+			margin-top: 40px;
+		}
+		section.boxes div {
+			display: inline-block;
+			height: 280px;
+			margin-right: 28px;
+			position: relative;
+			width: 280px;
+		}
+		section.boxes div:first-child {
+			margin-left: 28px;
+		}
+		section.boxes div:last-child {
+			margin-right: 0px;
+		}
+		section.boxes div:nth-child(1) {
+			background: url(images/responsive/char01.png) no-repeat center;
+			background-size: cover;
+		}
+		section.boxes div:nth-child(2) {
+			background: url(images/responsive/char02.png) no-repeat center;
+			background-size: cover;
+		}
+        section.boxes div:nth-child(3) {
+			background: url(images/responsive/char03.png) no-repeat center;
+			background-size: cover;
+		}
+        section.boxes div:nth-child(4) {
+			background: url(images/responsive/char04.png) no-repeat center;
+			background-size: cover;
+		}
+		section.boxes div p {
+			background-color: #000b;
+            -webkit-backdrop-filter: blur(2px);
+                    backdrop-filter: blur(2px);
+            border-top: 2px solid var(--color-2);
+			color: var(--color-1);
+			bottom: 0;
+			font-size: 1.4rem;
+			height: 20px;
+			margin: 0px;
+			padding: 20px 20px 30px 20px;
+			position: absolute;
+			text-align: center;
+			width: 240px;
+			transition: all 0.4s ease-in;
+		}
+		section.boxes div:hover {
+            transform: scale(1.05);
+			cursor: pointer;
+		}
+		section.boxes div:hover p {
+			height: 60px;
+		}
+		footer {
+			margin-top: 40px;
+		}
+		footer article {
+			background-color: #0006;
+            -webkit-backdrop-filter: blur(2px);
+                    backdrop-filter: blur(2px);
+			height: 280px;
+			position: relative;
+			margin: 50px 28px;
+		}
+		footer article figure {
+			background: url(images/responsive/art01.png) no-repeat center;
+			background-size: cover;
+			height: 280px;
+			margin: 0px;
+			width: 280px;
+		}
+		footer article.art1 figure {
+			background: url(images/responsive/art02.png) no-repeat center;
+		}
+		footer article figure,
+		footer article div {
+			display: inline-block;
+			vertical-align: top;
+		}
+		footer article div {
+			margin-left: 28px;
+			width: 600px;
+		}
+		footer article div h2 {
+            border-bottom: 2px solid var(--color-2);
+			color: var(--color-1);
+			font-size: 2rem;
+			margin: 20px 0px;
+		}
+		footer article div p {
+			color: #fff9;
+			line-height: 1.4em;
+			text-align: justify;
+		}
+		/* - - - - - - - - - - - - - - - - - - - - - */
+		@media (max-width: 1290px) {
+			main {
+				width: 680px;
+			}
+			header div.logo {
+				background-size: 100%;
+			}
+			section.boxes div {
+				margin: 28px;
+			}
+			footer article div {
+				width: 280px;
+			}
+			footer article div h2 {
+				font-size: 1.4rem;
+			}
+			footer article div p {
+				overflow: scroll;
+				height: 180px;
+			}
+		}
+		/* - - - - - - - - - - - - - - - - - - - - - */
+		@media (max-width: 690px) {
+			main {
+				width: 480px;
+			}
+			section.boxes div {
+				display: block;
+				margin: 28px auto !important;
+                width: 90%;
+                height: 340px;
+			}
+            section.boxes div p {
+                height: 20px;
+                width: 392px;
+            }
+			footer article {
+				height: 580px;
+				margin: 40px auto;
+				width: 90%;
+			}
+            footer article figure {
+                background-size: 180%;
+            }
+			footer article figure,
+			footer article div {
+				display: block;
+                width: 100%;
+			}
+			footer article div {
+				margin-left: 0px;
+			}
+            footer article div h2 {
+                text-indent: 0.8rem;
+            }
+            footer article div p {
+                padding: 0.8rem;
+            }
+		}
+	</style>
+</head>
+<body>
+	<main>
+		<header>
+			<div class="logo"></div>
+		</header>
+		<section class="boxes">
+			<div class="box1">
+				<p>01 <small>Johnny Silverhand</small></p>
+			</div>
+			<div class="box2">
+				<p>02 <small>Judy Álvarez</small></p>
+			</div>
+			<div class="box3">
+				<p>03 <small>Evelyn</small></p>
+			</div>
+			<div class="box4">
+				<p>04 <small>Jackie Welles</small></p>
+			</div>
+		</section>
+		<footer>
+			<article class="art1">
+				<figure></figure>
+				<div class="content">
+					<h2> STORY </h2>
+					<p>
+						Take on your life's work - testing a unique implant that allows you to achieve immortality - and forge your legend in the vast open world of Night City, where your decisions will shape the story and the people around you. Take on all sorts of quests to thrive from emerging merc to cyberpunk legend, while uncovering the mysteries surrounding the priceless implant that everyone wants to get their hands on.
+					</p>
+				</div>
+			</article>
+			<article class="art2">
+				<figure></figure>
+				<div class="content">
+					<h2> PLAYABILITY </h2>
+					<p>
+						Invest in a variety of skills and perks to form a play style that suits your character. Use weapons, hacking skills and body implants that can be leveled up to become the best mercenary in town. Engage in clean combat, take out your enemies from afar or stealthily infiltrate heavily guarded locations.
+					</p>
+				</div>
+			</article>
+		</footer>
+	</main>
+</body>
+</html>
