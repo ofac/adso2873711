@@ -6,7 +6,7 @@
     <title>Challenge Grid</title>
     <link rel="stylesheet" href="css/master.css">
     <style>
-        div.grid {
+        div.grid1 {
             display: grid;
             margin-bottom: 0.4rem;
             grid-gap: 0.4rem;
@@ -14,25 +14,58 @@
                                  "four two five"
                                  "six six seven";
         }
-        section img {
+        div.grid1 img {
             border-radius: 4px;
+            outline: 2px solid #fffc;
             height: 128px;
             object-fit: cover;
             width: 128px;
         }
-        section img.img01 { grid-area: one; }
-        section img.img02 { 
+        div.grid1 img.img01 { grid-area: one; }
+        div.grid1 img.img02 { 
             height: calc(128px * 2 + 0.4rem);
             grid-area: two;  
         }
-        section img.img03 { grid-area: three; }
-        section img.img04 { grid-area: four; }
-        section img.img05 { grid-area: five; }
-        section img.img06 { 
+        div.grid1 img.img03 { grid-area: three; }
+        div.grid1 img.img04 { grid-area: four; }
+        div.grid1 img.img05 { grid-area: five; }
+        div.grid1 img.img06 { 
             grid-area: six; 
             width: calc(128px * 2 + 0.4rem);
         }
-        section img.img07 { grid-area: seven; }
+        div.grid1 img.img07 { grid-area: seven; }
+
+        div.grid2 {
+            display: grid;
+            margin-bottom: 0.4rem;
+            grid-gap: 0.4rem;
+            grid-template-areas: "one one two three"
+                                 "one one four four"
+                                 "five six four four";
+        }
+
+        div.grid2 img {
+            border-radius: 4px;
+            outline: 2px solid #fffc;
+            height: 94px;
+            object-fit: cover;
+            width: 94px;
+        }
+        div.grid2 img.img01 { 
+            height: calc(94px * 2 + 0.4rem);
+            width: calc(94px * 2 + 0.4rem);
+            grid-area: one; 
+        }
+        div.grid2 img.img02 { grid-area: two; }
+        div.grid2 img.img03 { grid-area: three; }
+        div.grid2 img.img04 { 
+            height: calc(94px * 2 + 0.4rem);
+            width: calc(94px * 2 + 0.4rem);
+            grid-area: four; 
+        }
+        div.grid2 img.img05 { grid-area: five; }
+        div.grid2 img.img06 { grid-area: six; }
+
 
 
     </style>
@@ -49,7 +82,7 @@
             <h2>Irregular Gallery</h2>
         </header>
         <section>
-            <div class="grid">
+            <div class="grid1">
                 <img class="img01" src="images/grid/ani01.png" alt="01">
                 <img class="img02" src="images/grid/ani02.png" alt="02">
                 <img class="img03" src="images/grid/ani03.png" alt="03">
@@ -58,14 +91,13 @@
                 <img class="img06" src="images/grid/ani06.png" alt="06">
                 <img class="img07" src="images/grid/ani07.png" alt="07">
             </div>
-            <div class="grid">
+            <div class="grid2">
                 <img class="img01" src="images/grid/ani01.png" alt="01">
                 <img class="img02" src="images/grid/ani02.png" alt="02">
                 <img class="img03" src="images/grid/ani03.png" alt="03">
                 <img class="img04" src="images/grid/ani04.png" alt="04">
                 <img class="img05" src="images/grid/ani05.png" alt="05">
                 <img class="img06" src="images/grid/ani06.png" alt="06">
-                <img class="img07" src="images/grid/ani07.png" alt="07">
             </div>
         </section>
     </main>
