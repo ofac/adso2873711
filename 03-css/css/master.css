@@ -83,9 +83,9 @@ main {
             width: 280px;
 
             i {
-                background-color: #b8c2d0;
+                background-color: #2260b8;
                 border-radius: 20px;
-                color: #0009;
+                color: #fff;
                 font-style: normal;
                 display: flex;
                 align-items: center;
