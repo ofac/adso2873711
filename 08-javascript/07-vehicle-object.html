@@ -6,6 +6,9 @@
     <title>07- Vehicle Object</title>
     <link rel="stylesheet" href="css/master.css">
     <style>
+        section {
+            position: relative;
+        }
         section div.header {
             align-items: center;
             display: flex;
@@ -21,8 +24,14 @@
             height: 44px;
             width: 44px;
         }
-        section div.header button.btn-light {
-            background: transparent url(images/vehicle/btn-light.svg) no-repeat;
+        section div.header button.btn-mode {
+            background: transparent url(images/vehicle/btn-mode.svg) no-repeat;
+        }
+        section img.image {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 154px;
         }
         section button {
             transition: all 0.2s ease-in;
@@ -111,6 +120,53 @@
         section div.methods button.btn-off {
             background: url(images/vehicle/btn-off.svg) no-repeat;
         }
+        /* Dark Mode */
+        section.dark {
+            div.header button.btn-mode {
+                background: transparent url(images/vehicle/btn-mode-dark.svg) no-repeat;
+            }
+            div.attributes {
+                background: url(images/vehicle/attributes-dark.svg) no-repeat;
+                span {
+                    color: #e6d6ff;
+                }
+            }
+            div.landscape button.btn-prev {
+                background: url(images/vehicle/btn-prev-dark.svg) no-repeat;
+            }
+            div.landscape button.btn-next {
+                background: url(images/vehicle/btn-next-dark.svg) no-repeat;
+            }
+            div.methods {
+                background: url(images/vehicle/methods-dark.svg) no-repeat;
+            }
+            div.methods button.btn-on {
+                background: url(images/vehicle/btn-on-dark.svg) no-repeat;
+            }
+            div.methods button.btn-fwd {
+                background: url(images/vehicle/btn-fordw-dark.svg) no-repeat;
+            }
+            div.methods button.btn-stop {
+                background: url(images/vehicle/btn-stop-dark.svg) no-repeat;
+            }
+            div.methods button.btn-bwd {
+                background: url(images/vehicle/btn-back-dark.svg) no-repeat;
+            }
+            div.methods button.btn-off {
+                background: url(images/vehicle/btn-off-dark.svg) no-repeat;
+            }
+        }
+
+        /* Methods */
+        .start {
+            animation: animStart 0.1s ease-in infinite;
+        }
+        @keyframes animStart {
+            100% {
+                bottom: 158px;
+            }
+        }
+
 
     </style>
 </head>
@@ -125,18 +181,19 @@
             <h1>07- Object</h1>
             <h2>Vehicle</h2>
         </header>
-        <section class="light">
+        <section>
             <div class="header">
                 <button class="btn-hidden"></button>
                 <img src="images/vehicle/logo.svg" alt="Logo">
-                <button class="btn-light"></button>
+                <button class="btn-mode"></button>
             </div>
             <div class="attributes">
-                <span class="brand">Volkswagen</span>
-                <span class="refer">Golf</span>
-                <span class="model">2020</span>
-                <span class="color">Black</span>
+                <span class="brand"></span>
+                <span class="refer"></span>
+                <span class="model"></span>
+                <span class="color"></span>
             </div>
+            <img src="" class="image">
             <div class="landscape">
                 <button class="btn-prev"></button>
                 <button class="btn-next"></button>
@@ -150,5 +207,101 @@
             </div>
         </section>
     </main>
+    <script>
+        // Values
+        var   index  = 0
+        var   engine = false
+        // DarkMode
+        const darkMode = window.matchMedia('(prefers-color-scheme: dark)')
+        // Elements
+        const btnMode  = document.querySelector('.btn-mode')
+        const section  = document.querySelector('section')
+        const btnPrev  = document.querySelector('.btn-prev')
+        const btnNext  = document.querySelector('.btn-next')
+        const btnOn    = document.querySelector('.btn-on')
+        const btnOff   = document.querySelector('.btn-off')
+        // Attributes
+        const brand    = document.querySelector('.brand')
+        const refer    = document.querySelector('.refer')
+        const model    = document.querySelector('.model')
+        const color    = document.querySelector('.color')
+        const image    = document.querySelector('.image')
+        // Btns: Events
+        btnMode.addEventListener('click', function() {
+            vehicle.mode()
+        })
+        btnOn.addEventListener('click', function() {
+            vehicle.start()
+        })
+        btnOff.addEventListener('click', function() {
+            vehicle.off()
+        })
+
+        const vehicle = {
+            attributes: [
+                { brand: 'Mercedes',   refer: 'CLE',   model: 2020, color: 'Orange', image: 'images/vehicle/car01.png'},
+                { brand: 'Volkswagen', refer: 'Jetta', model: 2016, color: 'Blue',   image: 'images/vehicle/car02.png'},
+                { brand: 'Hyundai',    refer: 'Creta', model: 2010, color: 'Red',    image: 'images/vehicle/car03.png'},
+                { brand: 'Mazda',      refer: 'MX-5',  model: 2024, color: 'Green',  image: 'images/vehicle/car04.png'}
+            ],
+            mode: function() {
+                section.classList.toggle('dark')
+            },
+            showAttributes: function(i) {
+                brand.textContent = this.attributes[i].brand
+                refer.textContent = this.attributes[i].refer
+                model.textContent = this.attributes[i].model
+                color.textContent = this.attributes[i].color
+                image.setAttribute('src', this.attributes[i].image)
+            },
+            start: function() {
+                if(!engine) {
+                    image.classList.add('start')
+                    engine = true
+                }
+            },
+            off: function() {
+                if(engine) {
+                    image.classList.remove('start')
+                    engine = false
+                }
+            }
+        }
+
+        vehicle.showAttributes(0)
+        darkModeChange(darkMode)
+        btnPrev.style.opacity = '0.2'
+
+        btnNext.addEventListener('click', function() {
+            console.log(vehicle.attributes.length)
+            if (index < (vehicle.attributes.length)-1) {
+                btnPrev.style.opacity = '1'
+                vehicle.showAttributes(++index)
+                if (index == (vehicle.attributes.length)-1) {
+                    this.style.opacity = '0.2'
+                }
+            }
+        })
+        btnPrev.addEventListener('click', function() {
+            if (index > 0) {
+                btnNext.style.opacity = '1'
+                vehicle.showAttributes(--index)
+                if (index == 0) {
+                    this.style.opacity = '0.2'
+                }
+            }
+        })
+   
+
+        function darkModeChange(dmq) {
+            if(dmq.matches) {
+                section.classList.add('dark')
+            } else {
+                section.classList.remove('dark')
+            }
+        }
+        darkMode.addListener(darkModeChange)
+
+    </script>
 </body>
 </html>
