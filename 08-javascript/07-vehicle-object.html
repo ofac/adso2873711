@@ -32,6 +32,7 @@
             left: 50%;
             transform: translateX(-50%);
             bottom: 154px;
+            z-index: 4;
         }
         section button {
             transition: all 0.2s ease-in;
@@ -66,26 +67,88 @@
             left: 250px;
         }
         section div.landscape {
-            background-color: #fff9;
             border: 3px solid #714eaa;
             display: flex;
             justify-content: space-between;
             align-items: center;
             border-radius: 5px;
+            overflow: hidden;
+            position: relative;
             height: 260px;
             margin: 0 auto;
             width: 374px;
+        }
+        section div.landscape div {
+            position: absolute;
+            height: 260px;
+            width: calc(760px * 2);
+        }
+        /* Fordward */
+        section div.landscape.fordward div.bg-sky {
+            animation-play-state:running;
+        }
+        section div.landscape.fordward div.bg-mountains {
+            animation-play-state:running;
+        }
+        section div.landscape.fordward div.bg-route {
+            animation-play-state:running;
+        }
+        /* Stop */
+        section div.landscape.stop div.bg-sky {
+            animation-play-state: paused;
+        }
+        section div.landscape.stop div.bg-mountains {
+            animation-play-state: paused;
+        }
+        section div.landscape.stop div.bg-route {
+            animation-play-state: paused;
+        }
+        /* Backward */
+        section div.landscape.backward div.bg-sky {
+            animation-direction: reverse;
+        }
+        section div.landscape.backward div.bg-mountains {
+            animation-direction: reverse;
+        }
+        section div.landscape.backward div.bg-route {
+            animation-direction: reverse;
+        }
+        section div.landscape div.bg-sky {
+            background: url(images/vehicle/bg-sky.svg) repeat-x 0 bottom;
+            animation: animParallax 40s linear infinite;
+            animation-play-state: paused;
+            z-index: 1;
+        }
+        section div.landscape div.bg-mountains {
+            background: url(images/vehicle/bg-mountains.svg) repeat-x 0 bottom;
+            animation: animParallax 30s linear infinite;
+            animation-play-state: paused;
+            z-index: 2;
+        }
+        section div.landscape div.bg-route {
+            background: url(images/vehicle/bg-route.svg) repeat-x 0 bottom;
+            animation: animParallax 5s linear infinite;
+            animation-play-state: paused;
+            z-index: 3;
+        }
+        @keyframes animParallax {
+            100% {
+                background-position: -1520px bottom;
+            }
         }
         section div.landscape button {
             border: none;
             cursor: pointer;
             height: 44px;
             width: 44px;
+            z-index: 5;
         }
         section div.landscape button.btn-prev {
+            margin-left: 4px;
             background: url(images/vehicle/btn-prev.svg) no-repeat;
         }
         section div.landscape button.btn-next {
+            margin-right: 4px;
             background: url(images/vehicle/btn-next.svg) no-repeat;
         }
         section div.methods {
@@ -130,6 +193,15 @@
                 span {
                     color: #e6d6ff;
                 }
+            }
+            div.landscape div.bg-sky {
+                background: url(images/vehicle/bg-sky-dark.svg) repeat-x 0 bottom;
+            }
+            div.landscape div.bg-mountains {
+                background: url(images/vehicle/bg-mountains-dark.svg) repeat-x 0 bottom;
+            }
+            div.landscape div.bg-route {
+                background: url(images/vehicle/bg-route-dark.svg) repeat-x 0 bottom;
             }
             div.landscape button.btn-prev {
                 background: url(images/vehicle/btn-prev-dark.svg) no-repeat;
@@ -195,6 +267,9 @@
             </div>
             <img src="" class="image">
             <div class="landscape">
+                <div class="bg-sky"></div>
+                <div class="bg-mountains"></div>
+                <div class="bg-route"></div>
                 <button class="btn-prev"></button>
                 <button class="btn-next"></button>
             </div>
@@ -211,21 +286,27 @@
         // Values
         var   index  = 0
         var   engine = false
+        var   move   = false
         // DarkMode
         const darkMode = window.matchMedia('(prefers-color-scheme: dark)')
         // Elements
-        const btnMode  = document.querySelector('.btn-mode')
-        const section  = document.querySelector('section')
-        const btnPrev  = document.querySelector('.btn-prev')
-        const btnNext  = document.querySelector('.btn-next')
-        const btnOn    = document.querySelector('.btn-on')
-        const btnOff   = document.querySelector('.btn-off')
+        const btnMode   = document.querySelector('.btn-mode')
+        const section   = document.querySelector('section')
+        const landscape = document.querySelector('.landscape')
+        const btnPrev   = document.querySelector('.btn-prev')
+        const btnNext   = document.querySelector('.btn-next')
+        const btnOn     = document.querySelector('.btn-on')
+        const btnStop   = document.querySelector('.btn-stop')
+        const btnOff    = document.querySelector('.btn-off')
+        const btnFwd    = document.querySelector('.btn-fwd')
+        const btnBwd    = document.querySelector('.btn-bwd')
+
         // Attributes
-        const brand    = document.querySelector('.brand')
-        const refer    = document.querySelector('.refer')
-        const model    = document.querySelector('.model')
-        const color    = document.querySelector('.color')
-        const image    = document.querySelector('.image')
+        const brand     = document.querySelector('.brand')
+        const refer     = document.querySelector('.refer')
+        const model     = document.querySelector('.model')
+        const color     = document.querySelector('.color')
+        const image     = document.querySelector('.image')
         // Btns: Events
         btnMode.addEventListener('click', function() {
             vehicle.mode()
@@ -236,7 +317,16 @@
         btnOff.addEventListener('click', function() {
             vehicle.off()
         })
-
+        btnFwd.addEventListener('click', function() {
+            vehicle.fordward()
+        })
+        btnStop.addEventListener('click', function() {
+            vehicle.stop()
+        })
+        btnBwd.addEventListener('click', function() {
+            vehicle.reverse()
+        })
+        // Onject
         const vehicle = {
             attributes: [
                 { brand: 'Mercedes',   refer: 'CLE',   model: 2020, color: 'Orange', image: 'images/vehicle/car01.png'},
@@ -261,9 +351,32 @@
                 }
             },
             off: function() {
-                if(engine) {
+                if(engine && !move) {
                     image.classList.remove('start')
                     engine = false
+                }
+            },
+            fordward: function() {
+                if(engine && !move) {
+                    landscape.classList.add('fordward')
+                    landscape.classList.remove('stop')
+                    landscape.classList.remove('backward')
+
+                    move = true
+                }
+            },
+            stop: function() {
+                if(engine && move) {
+                    landscape.classList.add('stop')
+                    move = false
+                }
+            },
+            reverse: function() {
+                if(engine && !move) {
+                    landscape.classList.add('backward')
+                    landscape.classList.remove('stop')
+    
+                    move = true
                 }
             }
         }
@@ -292,7 +405,6 @@
             }
         })
    
-
         function darkModeChange(dmq) {
             if(dmq.matches) {
                 section.classList.add('dark')
