@@ -285,8 +285,8 @@
     <script>
         // Values
         var   index  = 0
-        var   engine = false
-        var   move   = false
+        var   isOn   = false
+        var   isMove = false
         // DarkMode
         const darkMode = window.matchMedia('(prefers-color-scheme: dark)')
         // Elements
@@ -300,7 +300,6 @@
         const btnOff    = document.querySelector('.btn-off')
         const btnFwd    = document.querySelector('.btn-fwd')
         const btnBwd    = document.querySelector('.btn-bwd')
-
         // Attributes
         const brand     = document.querySelector('.brand')
         const refer     = document.querySelector('.refer')
@@ -345,38 +344,37 @@
                 image.setAttribute('src', this.attributes[i].image)
             },
             start: function() {
-                if(!engine) {
+                if(!isOn) {
                     image.classList.add('start')
-                    engine = true
+                    isOn = true
                 }
             },
             off: function() {
-                if(engine && !move) {
+                if(isOn && !isMove) {
                     image.classList.remove('start')
-                    engine = false
+                    isOn = false
                 }
             },
             fordward: function() {
-                if(engine && !move) {
+                if(isOn && !isMove) {
                     landscape.classList.add('fordward')
                     landscape.classList.remove('stop')
                     landscape.classList.remove('backward')
-
-                    move = true
+                    isMove = true
                 }
             },
             stop: function() {
-                if(engine && move) {
+                if(isOn && isMove) {
                     landscape.classList.add('stop')
-                    move = false
+                    isMove = false
                 }
             },
             reverse: function() {
-                if(engine && !move) {
+                if(isOn && !isMove) {
                     landscape.classList.add('backward')
                     landscape.classList.remove('stop')
     
-                    move = true
+                    isMove = true
                 }
             }
         }
@@ -412,6 +410,7 @@
                 section.classList.remove('dark')
             }
         }
+        
         darkMode.addListener(darkModeChange)
 
     </script>
