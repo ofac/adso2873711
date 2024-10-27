@@ -81,54 +81,18 @@
         section div.landscape div {
             position: absolute;
             height: 260px;
-            width: calc(760px * 2);
-        }
-        /* Fordward */
-        section div.landscape.fordward div.bg-sky {
-            animation-play-state:running;
-        }
-        section div.landscape.fordward div.bg-mountains {
-            animation-play-state:running;
-        }
-        section div.landscape.fordward div.bg-route {
-            animation-play-state:running;
-        }
-        /* Stop */
-        section div.landscape.stop div.bg-sky {
-            animation-play-state: paused;
-        }
-        section div.landscape.stop div.bg-mountains {
-            animation-play-state: paused;
-        }
-        section div.landscape.stop div.bg-route {
-            animation-play-state: paused;
-        }
-        /* Backward */
-        section div.landscape.backward div.bg-sky {
-            animation-direction: reverse;
-        }
-        section div.landscape.backward div.bg-mountains {
-            animation-direction: reverse;
-        }
-        section div.landscape.backward div.bg-route {
-            animation-direction: reverse;
+            width: 760px;
         }
         section div.landscape div.bg-sky {
             background: url(images/vehicle/bg-sky.svg) repeat-x 0 bottom;
-            animation: animParallax 40s linear infinite;
-            animation-play-state: paused;
             z-index: 1;
         }
         section div.landscape div.bg-mountains {
             background: url(images/vehicle/bg-mountains.svg) repeat-x 0 bottom;
-            animation: animParallax 30s linear infinite;
-            animation-play-state: paused;
             z-index: 2;
         }
         section div.landscape div.bg-route {
             background: url(images/vehicle/bg-route.svg) repeat-x 0 bottom;
-            animation: animParallax 5s linear infinite;
-            animation-play-state: paused;
             z-index: 3;
         }
         @keyframes animParallax {
@@ -136,6 +100,7 @@
                 background-position: -1520px bottom;
             }
         }
+
         section div.landscape button {
             border: none;
             cursor: pointer;
@@ -235,7 +200,7 @@
         }
         @keyframes animStart {
             100% {
-                bottom: 158px;
+                bottom: 156px;
             }
         }
 
@@ -267,9 +232,9 @@
             </div>
             <img src="" class="image">
             <div class="landscape">
-                <div class="bg-sky"></div>
-                <div class="bg-mountains"></div>
-                <div class="bg-route"></div>
+                <div class="layer bg-sky"></div>
+                <div class="layer bg-mountains"></div>
+                <div class="layer bg-route"></div>
                 <button class="btn-prev"></button>
                 <button class="btn-next"></button>
             </div>
@@ -284,15 +249,19 @@
     </main>
     <script>
         // Values
-        var   index  = 0
-        var   isOn   = false
-        var   isMove = false
+        var   index         = 0
+        var   isOn          = false
+        var   isPaused      = false
+        var   isReversed    = false
+        var   lastTimestamp = 0
+        const speedFactors  = [0.04, 0.08, 0.25]
         // DarkMode
         const darkMode = window.matchMedia('(prefers-color-scheme: dark)')
         // Elements
         const btnMode   = document.querySelector('.btn-mode')
         const section   = document.querySelector('section')
         const landscape = document.querySelector('.landscape')
+        const layers    = document.querySelectorAll('.layer')
         const btnPrev   = document.querySelector('.btn-prev')
         const btnNext   = document.querySelector('.btn-next')
         const btnOn     = document.querySelector('.btn-on')
@@ -346,35 +315,35 @@
             start: function() {
                 if(!isOn) {
                     image.classList.add('start')
-                    isOn = true
+                    isOn     = true
+                    isPaused = true
                 }
             },
             off: function() {
-                if(isOn && !isMove) {
+                if(isOn && isPaused) {
                     image.classList.remove('start')
                     isOn = false
                 }
             },
             fordward: function() {
-                if(isOn && !isMove) {
-                    landscape.classList.add('fordward')
-                    landscape.classList.remove('stop')
-                    landscape.classList.remove('backward')
-                    isMove = true
+                if(isOn) {
+                    lastTimestamp = 0
+                    isPaused      = false
+                    isReversed    = false
+                    requestAnimationFrame(animateParallax)
                 }
             },
             stop: function() {
-                if(isOn && isMove) {
-                    landscape.classList.add('stop')
-                    isMove = false
+                if(isOn && !isPaused) {
+                    isPaused = true
                 }
             },
             reverse: function() {
-                if(isOn && !isMove) {
-                    landscape.classList.add('backward')
-                    landscape.classList.remove('stop')
-    
-                    isMove = true
+                if(isOn) {
+                    lastTimestamp = 0
+                    isReversed    = true
+                    isPaused      = false
+                    requestAnimationFrame(animateParallax)
                 }
             }
         }
@@ -383,6 +352,7 @@
         darkModeChange(darkMode)
         btnPrev.style.opacity = '0.2'
 
+        // Next & Prev Buttons
         btnNext.addEventListener('click', function() {
             console.log(vehicle.attributes.length)
             if (index < (vehicle.attributes.length)-1) {
@@ -402,7 +372,7 @@
                 }
             }
         })
-   
+        // DarkMode Change
         function darkModeChange(dmq) {
             if(dmq.matches) {
                 section.classList.add('dark')
@@ -410,7 +380,26 @@
                 section.classList.remove('dark')
             }
         }
-        
+        // animate Parallax
+        layers.forEach(layer => {
+            layer.dataset.pos = '0'
+        })
+        function animateParallax(timestamp) {
+            if (!isPaused) {
+                const delta   = timestamp - (lastTimestamp || timestamp)
+                lastTimestamp = timestamp
+
+                layers.forEach((layer, index) => {
+                let currentPos = (parseFloat(layer.dataset.pos) || 0) 
+                                 + speedFactors[index] 
+                                 * (isReversed ? delta : -delta)
+                layer.style.backgroundPositionX = `${currentPos}px`
+                layer.dataset.pos = currentPos
+                })
+            }
+            requestAnimationFrame(animateParallax)
+        }
+        //
         darkMode.addListener(darkModeChange)
 
     </script>
